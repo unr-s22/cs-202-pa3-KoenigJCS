@@ -1,6 +1,6 @@
 #makefile
 main: main.cpp Money.o Money.h Account.o Account.h
-	g++ pa3.exe -std=c++11 -o main.cpp Money.o Money.h Account.o Account.h
+	g++ -std=c++11 -o pa3.exe main.cpp Money.o Money.h Account.o Account.h
 
 Money.o: Money.cpp Money.h
 	g++ -c Money.cpp
