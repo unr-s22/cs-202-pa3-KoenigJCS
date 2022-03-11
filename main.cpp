@@ -3,7 +3,7 @@
 #include "Money.h"
 
 int main(){
-    Account account;
+    Account account();
 
     cout << account << endl;
 

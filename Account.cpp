@@ -1,15 +1,15 @@
 //Account.cpp
 #include "Account.h"
 
-Account::Account():{}
+Account::Account(){};
 
-void Account::makeDeposit(Money money(int &dollars, int &cents)){
+void Account::makeDeposit(Money& money){
     storeD[countDep] = money;
     countDep ++;
     needBalUpdt = true;
 }
 
-void Account::makeWithdrawals(Money money(int &dollars, int &cents))){
+void Account::makeWithdrawals(Money& money){
     storeW[countWit] = money;
     countWit ++;
     needBalUpdt = true;
@@ -17,10 +17,11 @@ void Account::makeWithdrawals(Money money(int &dollars, int &cents))){
 
 int Account::getBalance(){
     if(needBalUpdt){
-        for(int k = 0, j=0; k < (storeD.length() + storeW.length()), k++){
-            if(storeD[k] != '\0'){
+        needBalUpdt = false;
+        for(int k = 0, j=0; k < (storeD.size() + storeW.size()); k++){
+            if(storeD[k]==){
                 currentBal += storeD[k];
-            } else if(storeD[k] == '\0' && storeW[j]{
+            } else if(storeD[k] == NULL && storeW[j]){
                 currentBal -= storeW[j];
                 j++;
             }
@@ -32,12 +33,11 @@ int Account::getBalance(){
         return currentBal;
 
     }
-    needBalUpdt = false;
 }
 
-ostream& operator <<(std::ostream& os, const Money& money){
+ostream& operator <<(std::ostream& os, Account& account){
     os<<"Account Details\n--------------------------\nCurrent Balance: "
-    << getBalance() << "\n--------------------------\nNumber of Deposits: "
+    << account.getBalance() << "\n--------------------------\nNumber of Deposits: "
     << countDep << "\n--------------------(1) " << storeD[0] <<
     "\n(2) " << storeD[1] << "(3) " << storeD[2] << 
     "\n--------------------------\nNumber of Withdrawals: "
