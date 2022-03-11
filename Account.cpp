@@ -1,40 +1,49 @@
 //Account.cpp
 #include "Account.h"
 
-Account::Account(int startBal){
-    Money money( );
-}
+Account::Account():{}
 
-void Account::makeDeposit(money( )){
-    
+void Account::makeDeposit(Money money(int &dollars, int &cents)){
+    storeD[countDep] = money;
     countDep ++;
     needBalUpdt = true;
 }
 
-void Account::makeWithdrawals(money( )){
-
+void Account::makeWithdrawals(Money money(int &dollars, int &cents))){
+    storeW[countWit] = money;
     countWit ++;
     needBalUpdt = true;
 }
 
-string Account::getBalance(){
-    for(int i = 0; i < countDep; i ++){
-        depTot << "(" << i << ") " << money( ) << "\n" << endl;
-    }
-    for(int j = 0; j < countWit; j ++){
-        witTot << "(" << j << ") " << money( ) << "\n" << endl;
-    }
+int Account::getBalance(){
     if(needBalUpdt){
-        outputBal << "Account Details\n------------------\n
-        Current Balance: " << money( ) << "\n------------------\n
-        Number of Deposits: " << countDep << "\n------------------\n"
-        << depTot << "------------------\nNumber of Withdrawals: " <<
-        countWit << "------------------\n" << witTot << endl;
+        for(int k = 0, j=0; k < (storeD.length() + storeW.length()), k++){
+            if(storeD[k] != '\0'){
+                currentBal += storeD[k];
+            } else if(storeD[k] == '\0' && storeW[j]{
+                currentBal -= storeW[j];
+                j++;
+            }
+        }
+        countDep = 0;
+        countWit = 0;
+        return currentBal;
     } else {
-        outputBal << "Current Balance: " << money( ) << "\n" << endl;
+        return currentBal;
 
     }
     needBalUpdt = false;
+}
+
+ostream& operator <<(std::ostream& os, const Money& money){
+    os<<"Account Details\n--------------------------\nCurrent Balance: "
+    << getBalance() << "\n--------------------------\nNumber of Deposits: "
+    << countDep << "\n--------------------(1) " << storeD[0] <<
+    "\n(2) " << storeD[1] << "(3) " << storeD[2] << 
+    "\n--------------------------\nNumber of Withdrawals: "
+    << countWit << "\n--------------------------\n(1) " << storeW[0] << endl;
+
+    return os;
 }
 
 Account::~Account(){
