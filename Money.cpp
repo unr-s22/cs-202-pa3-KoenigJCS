@@ -80,10 +80,15 @@ Money operator +(const Money& money1, const Money& money2)
 Money operator -(const Money& money1, const Money& money2)
 {
     Money m0(money1.m_dollars-money2.m_dollars,money1.m_cents-money2.m_cents);
-    if(m0.m_cents>=0 && m0.m_dollars<0)
+    if(m0.m_cents>0 && m0.m_dollars<0)
     {
         m0.m_cents-=100;
         m0.m_dollars++;
+    }
+    if(m0.m_cents<0 && m0.m_dollars>0)
+    {
+        m0.m_cents+=100;
+        m0.m_dollars--;
     }
     return m0;
 }
