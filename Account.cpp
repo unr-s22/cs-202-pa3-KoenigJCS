@@ -1,47 +1,64 @@
 //Account.cpp
 #include "Account.h"
 
-Account::Account():{}
+Account::Account(){};
 
-void Account::makeDeposit(Money money(int &dollars, int &cents)){
-    storeD[countDep] = money;
+void Account::makeDeposit(Money& money(int &dollars, int &cents)){
+    storeD[countDep] = money(dollars, cents);
     countDep ++;
     needBalUpdt = true;
 }
 
-void Account::makeWithdrawals(Money money(int &dollars, int &cents))){
-    storeW[countWit] = money;
+void Account::makeWithdrawals(Money& money(int &dollars, int &cents)){
+    storeW[countWit] = money(dollars, cents);
     countWit ++;
     needBalUpdt = true;
 }
 
-int Account::getBalance(){
+std::vector<Money*> Account::getBalance(){
     if(needBalUpdt){
-        for(int k = 0, j=0; k < (storeD.length() + storeW.length()), k++){
-            if(storeD[k] != '\0'){
-                currentBal += storeD[k];
-            } else if(storeD[k] == '\0' && storeW[j]{
-                currentBal -= storeW[j];
-                j++;
+        needBalUpdt = false;
+        for(int k = 0; k < storeD.size(); k++){
+            if(k < countDep){
+                storeTrans[k] = storeD[k];
+            }
+        }
+        for(int j = 0; j < storeW.size(); j++){
+            if(j < countWit){
+                storeTrans[j] = storeW[j];
             }
         }
         countDep = 0;
         countWit = 0;
-        return currentBal;
+        return storeTrans;
     } else {
-        return currentBal;
-
+        return storeTrans;
     }
-    needBalUpdt = false;
 }
 
-ostream& operator <<(std::ostream& os, const Money& money){
-    os<<"Account Details\n--------------------------\nCurrent Balance: "
-    << getBalance() << "\n--------------------------\nNumber of Deposits: "
-    << countDep << "\n--------------------(1) " << storeD[0] <<
-    "\n(2) " << storeD[1] << "(3) " << storeD[2] << 
-    "\n--------------------------\nNumber of Withdrawals: "
-    << countWit << "\n--------------------------\n(1) " << storeW[0] << endl;
+std::ostream& operator <<(std::ostream& os, Account& account){
+    
+    os<<"Account Details\n--------------------------\nCurrent Balance: ";
+    
+    std::vector<Money*> storeBal = account.getBalance();
+    
+    for(int l = 1; l < (account.getCountDep() + account.getCountWit()); l++){
+        if(l < account.getCountDep()){
+            storeBal[0] = storeBal[0] + storeBal[l];
+        } else {
+            storeBal[0] = storeBal[0] - storeBal[l];
+        }
+    }
+    os << storeBal[0] << "\n--------------------------\nNumber of Deposits: "
+    << account.getCountDep() << "\n--------------------";
+    for(int m = 0; m < account.getCountDep(); m++){
+        os << "\n(" << m << ") " << account.getStoreD(m);
+    }
+    os<<"\n--------------------------\nNumber of Withdrawals: "
+    << account.getCountWit() << "\n--------------------------";
+    for(int n = 0; n < account.getCountWit(); n++){
+        os << "\n(" << n << ") " << account.getStoreW(n);
+    }
 
     return os;
 }
