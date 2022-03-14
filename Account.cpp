@@ -4,44 +4,54 @@
 Account::Account(){};
 
 void Account::makeDeposit(Money& money){
-    storeD[countDep] = money;
-    countDep ++;
+    storeD.push_back(money);
     needBalUpdt = true;
 }
 
-void Account::makeWithdrawals(Money& money){
-    storeW[countWit] = money;
-    countWit ++;
+void Account::makeWithdrawal(Money& money){
+    storeW.push_back(money);
     needBalUpdt = true;
 }
 
-int Account::getBalance(){
-    if(needBalUpdt){
-        needBalUpdt = false;
-        for(int k = 0, j=0; k < (storeD.size() + storeW.size()); k++){
-            if(storeD[k]==){
-                currentBal += storeD[k];
-            } else if(storeD[k] == NULL && storeW[j]){
-                currentBal -= storeW[j];
-                j++;
-            }
+Money* Account::getBalance(){
+    if(needBalUpdt)
+    {
+        ballance -= ballance;
+        for(int k = 0; k < storeD.size(); k++){
+            ballance += storeD[k];
         }
-        countDep = 0;
-        countWit = 0;
-        return currentBal;
-    } else {
-        return currentBal;
-
+        for(int j = 0; j < storeW.size(); j++){
+            ballance -= storeW[j];
+        }
+        needBalUpdt = false;
     }
+    return &ballance;
 }
 
-ostream& operator <<(std::ostream& os, Account& account){
-    os<<"Account Details\n--------------------------\nCurrent Balance: "
-    << account.getBalance() << "\n--------------------------\nNumber of Deposits: "
-    << countDep << "\n--------------------(1) " << storeD[0] <<
-    "\n(2) " << storeD[1] << "(3) " << storeD[2] << 
-    "\n--------------------------\nNumber of Withdrawals: "
-    << countWit << "\n--------------------------\n(1) " << storeW[0] << endl;
+std::ostream& operator <<(std::ostream& os, Account& account){
+    
+    os<<"Account Details\n--------------------------"<<std::endl;
+    os<<"Current Balance: ";
+    
+    //Money* storeBal = account.getBalance();
+    
+    // for(int i = 0; i < (account.getCountDep()); i++){
+    //     if(i < account.getCountDep()){
+    //         storeBal[0] += storeBal[i];
+    //     } else {
+    //         storeBal[0] -= storeBal[i];
+    //     }
+    // }
+    os << *account.getBalance() << "\n--------------------------\nNumber of Deposits: "
+    << account.storeD.size() << "\n--------------------";
+    for(int m = 0; m < account.storeD.size(); m++){
+        os << "\n(" << m+1 << ") " << account.storeD[m];
+    }
+    os<<"\n--------------------------\nNumber of Withdrawals: "
+    << account.storeW.size() << "\n--------------------------";
+    for(int n = 0; n < account.storeW.size(); n++){
+        os << "\n(" << n+1 << ") " << account.storeW[n];
+    }
 
     return os;
 }

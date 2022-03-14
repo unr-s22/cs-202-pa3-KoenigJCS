@@ -3,27 +3,94 @@
 #include "Money.h"
 
 int main(){
-    Account account();
+    Account account{};
 
-    cout << account << endl;
+    std::cout << account <<"\n\n";
+    Money moneyAAdd(200, 0);
+    Money moneyBAdd(300, 24);
+    Money moneyCAdd(501, 22);
+    account.makeDeposit(moneyAAdd);
+    account.makeDeposit(moneyBAdd);
+    account.makeDeposit(moneyCAdd);
 
-    account.makeDeposit(Money moneyAAdd(200, 00));
-    account.makeDeposit(Money moneyBAdd(300, 24));
-    account.makeDeposit(Money moneyCAdd(501, 22));
+    std::cout << account << "\n\n";
+    Money moneyDSub(300, 10);
+    Money moneyESub(201, 34);
+    account.makeWithdrawal(moneyDSub);
+    account.makeWithdrawal(moneyESub);
 
-    cout << account << endl;
-
-    account.makeWithdrawal(Money moneyDSub(300, 10));
-    account.makeWithdrawal(Money moneyESub(201, 34));
-
-    cout << account << endl;
+    std::cout << account << "\n\n";
 
     Money mtest(100, 10);
     Money ntest(100, 10);
-    if(mtest > ntest){
-        cout << "The operators are not working as inteded\n" << endl;
-    } else {
-        cout << "The operators are working as intended\n" << endl;
+    Money m1{};
+    if(mtest > ntest)
+    {
+        std::cout << "The operators > are not working as intended\n" << std::endl;
+    } 
+    else 
+    {
+        std::cout << "The operators > are working as intended\n" << std::endl;
+    }
+    if(mtest < ntest)
+    {
+        std::cout << "The operators < are working as intended\n" << std::endl;
+    } 
+    else 
+    {
+        std::cout << "The operators < are not working as intended\n" << std::endl;
+    }
+    if(mtest != ntest)
+    {
+        std::cout << "The operators != are not working as intended\n" << std::endl;
+    } 
+    else 
+    {
+        std::cout << "The operators != are working as intended\n" << std::endl;
+    }
+
+    if(mtest == ntest)
+    {
+        std::cout << "The operators == are working as intended\n" << std::endl;
+    } 
+    else 
+    {
+        std::cout << "The operators == are not working as intended\n" << std::endl;
+    }
+    Money no(0,0);
+    if(mtest-mtest==no)
+    {
+        std::cout << "The operators - are working as intended\n" << std::endl;
+    } 
+    else 
+    {
+        std::cout << "The operators - are not working as intended\n" << std::endl;
+    }
+    if(no+mtest==mtest)
+    {
+        std::cout << "The operators + are working as intended\n" << std::endl;
+    } 
+    else 
+    {
+        std::cout << "The operators + are not working as intended\n" << std::endl;
+    }
+    Money test2(110,90);
+    Money test2o(211,0);
+    if(mtest+test2==test2o)
+    {
+        std::cout << mtest+test2<<"=="<<test2o<<" The operators + (overflow) are working as intended\n" << std::endl;
+    } 
+    else 
+    {
+        std::cout << "The operators + (overflow) are not working as intended\n" << std::endl;
+    }
+    if((test2-mtest)-mtest<no)
+    {
+        std::cout << (test2-mtest)-mtest<<"<0 The operators - (overflow) are working as intended\n" << std::endl;
+    } 
+    else 
+    {
+        std::cout << "The operators - (overflow) are not working as intended\n" << std::endl;
     }
 
     return 0;

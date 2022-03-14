@@ -6,23 +6,27 @@
 #include <string>
 #include <vector>
 #include <sstream>
-using namespace std;
 
 class Account
 {
 private:
-    vector<Money> storeD;
-    vector<Money> storeW;
+    std::vector<Money> storeD;
+    std::vector<Money> storeW;
     bool needBalUpdt = false;
-    stringstream outputBal, depTot, witTot;
-    int countDep = 0, countWit = 0, startBal = 0, currentBal = 0;
-    Money money(int &dollars, int &cents);
+    int startBal = 0;
+    Money ballance{};
 public:
     explicit Account();
 
     void makeDeposit(Money& money);
-    void makeWithdrawals(Money& money);
-    int getBalance();
+    void makeWithdrawal(Money& money);
+    
+    Money getStoreD(int p) { return storeD[p]; }
+    void setStoreD(std::vector<Money> &sD){ storeD = sD; }
+    Money getStoreW(int q) { return storeW[q]; }
+    void setStoreW(std::vector<Money> &sW){ storeW = sW; }
+
+    Money* getBalance();
     friend std::ostream& operator<<(std::ostream& os, Account& account);
 
 
