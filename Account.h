@@ -10,28 +10,23 @@
 class Account
 {
 private:
-    std::vector<Money*> storeD;
-    std::vector<Money*> storeW;
+    std::vector<Money> storeD;
+    std::vector<Money> storeW;
     bool needBalUpdt = false;
-    int countDep = 0, countWit = 0, startBal = 0;
-    Money money(int &dollars, int &cents);
-    std::vector<Money*> storeTrans;
+    int startBal = 0;
+    Money ballance{};
 public:
     explicit Account();
 
-    void makeDeposit(Money& money(int &dollars, int &cents));
-    void makeWithdrawals(Money& money(int &dollars, int &cents));
+    void makeDeposit(Money& money);
+    void makeWithdrawal(Money& money);
     
-    int getCountDep(){ return countDep; }
-    void setCountDep(int cD){ countDep = cD; }
-    int getCountWit(){ return countWit; }
-    void setCountWit(int cW){ countWit = cW; }
-    Money* getStoreD(int p) { return storeD[p]; }
-    void setStoreD(std::vector<Money*> &sD){ storeD = sD; }
-    Money* getStoreW(int q) { return storeW[q]; }
-    void setStoreW(std::vector<Money*> &sW){ storeW = sW; }
+    Money getStoreD(int p) { return storeD[p]; }
+    void setStoreD(std::vector<Money> &sD){ storeD = sD; }
+    Money getStoreW(int q) { return storeW[q]; }
+    void setStoreW(std::vector<Money> &sW){ storeW = sW; }
 
-    std::vector<Money*> getBalance();
+    Money* getBalance();
     friend std::ostream& operator<<(std::ostream& os, Account& account);
 
 

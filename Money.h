@@ -21,6 +21,9 @@ public:
     friend bool operator >(const Money& money1, const Money& money2);
     friend bool operator <(const Money& money1, const Money& money2);
 
+    friend void operator +=(Money& money1, Money& money2);
+    friend void operator -=(Money& money1, Money& money2);
+
     friend Money operator +(const Money& money1, const Money& money2);
     friend Money operator -(const Money& money1, const Money& money2);
 };
