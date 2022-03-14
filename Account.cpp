@@ -32,16 +32,6 @@ std::ostream& operator <<(std::ostream& os, Account& account){
     
     os<<"Account Details\n--------------------------"<<std::endl;
     os<<"Current Balance: ";
-    
-    //Money* storeBal = account.getBalance();
-    
-    // for(int i = 0; i < (account.getCountDep()); i++){
-    //     if(i < account.getCountDep()){
-    //         storeBal[0] += storeBal[i];
-    //     } else {
-    //         storeBal[0] -= storeBal[i];
-    //     }
-    // }
     os << *account.getBalance() << "\n--------------------------\nNumber of Deposits: "
     << account.storeD.size() << "\n--------------------";
     for(int m = 0; m < account.storeD.size(); m++){
