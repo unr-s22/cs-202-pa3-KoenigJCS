@@ -13,7 +13,6 @@ private:
     std::vector<Money> storeD;
     std::vector<Money> storeW;
     bool needBalUpdt = false;
-    int startBal = 0;
     Money ballance{};
 public:
     explicit Account();
