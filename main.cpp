@@ -34,11 +34,11 @@ int main(){
     }
     if(mtest < ntest)
     {
-        std::cout << "The operators < are working as intended\n" << std::endl;
+        std::cout << "The operators < are not working as intended\n" << std::endl;
     } 
     else 
     {
-        std::cout << "The operators < are not working as intended\n" << std::endl;
+        std::cout << "The operators < are working as intended\n" << std::endl;
     }
     if(mtest != ntest)
     {
