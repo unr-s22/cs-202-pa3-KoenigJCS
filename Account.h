@@ -3,9 +3,7 @@
 #define DEMO_ACCOUNT_H
 #include "Money.h"
 #include <iostream>
-#include <string>
 #include <vector>
-#include <sstream>
 
 class Account
 {

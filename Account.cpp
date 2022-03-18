@@ -30,7 +30,7 @@ Money* Account::getBalance(){
 
 std::ostream& operator <<(std::ostream& os, Account& account){
     
-    os<<"Account Details\n--------------------------"<<std::endl<<"Current Balance: "<< *account.getBalance();
+    os<<"Account Details\n--------------------------"<<"Current Balance: "<< *account.getBalance();
     os<<"\n--------------------------\nNumber of Deposits: "<< account.storeD.size() << "\n--------------------";
     for(int m = 0; m < account.storeD.size(); m++){
         os << "\n(" << m+1 << ") " << account.storeD[m];
