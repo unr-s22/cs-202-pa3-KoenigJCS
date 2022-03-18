@@ -5,21 +5,23 @@
 int main(){
     Account account{};
 
-    std::cout << account <<"\n\n";
+    Money firstDep(300, 23);
+    account.makeDeposit(firstDep);
+    std::cout << account <<"\n\n"<< std::endl;
+
     Money moneyAAdd(200, 0);
     Money moneyBAdd(300, 24);
     Money moneyCAdd(501, 22);
     account.makeDeposit(moneyAAdd);
     account.makeDeposit(moneyBAdd);
     account.makeDeposit(moneyCAdd);
+    std::cout << account << "\n\n"<< std::endl;
 
-    std::cout << account << "\n\n";
     Money moneyDSub(300, 10);
     Money moneyESub(201, 34);
     account.makeWithdrawal(moneyDSub);
     account.makeWithdrawal(moneyESub);
-
-    std::cout << account << "\n\n";
+    std::cout << account << "\n\n"<< std::endl;
 
     Money mtest(100, 10);
     Money ntest(100, 10);
